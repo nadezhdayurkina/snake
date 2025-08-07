@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
-let headValue = null;
+let headValue: number | null = null;
 const field = ref();
 let win = ref();
 let gameover = ref();
@@ -37,7 +37,7 @@ let createApple = () => {
   if (gameover.value == true || win.value == true) return;
 
   let countApples = 0;
-  let zero = [];
+  let zero: {i: number, j: number}[] = [];
 
   for (let i = 0; i < field.value.length; i = i + 1) {
     for (let j = 0; j < field.value[i].length; j = j + 1) {
@@ -106,8 +106,8 @@ let moveHeadStep = (headLineCoordinate, headColumnCoordinate, i, j) => {
   }
 
   if (field.value[headLineCoordinate][headColumnCoordinate] == 'a') {
-    field.value[headLineCoordinate][headColumnCoordinate] = headValue + 1;
-    headValue = headValue + 1;
+    field.value[headLineCoordinate][headColumnCoordinate] = (headValue ?? 0) + 1;
+    headValue = (headValue ?? 0) + 1;
     checkWin();
     return;
   }
